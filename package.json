@@ -1,0 +1,39 @@
+{
+  "name": "ts_rest_api",
+  "version": "0.0.2",
+  "description": "A REST-full API in typescript, express and prisma intergration",
+  "main": "app.js",
+  "scripts": {
+    "stage": "bash -c ./scripts/linter.push.sh",
+    "dev": "ts-node-dev --respawn src/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shadmeoli/Typescript-REST-API.git"
+  },
+  "author": "shadmeoli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shadmeoli/Typescript-REST-API/issues"
+  },
+  "homepage": "https://github.com/shadmeoli/Typescript-REST-API#readme",
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.5"
+  },
+  "devDependencies": {
+    "@prisma/client": "^4.11.0",
+    "@types/axios": "^0.14.0",
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "esbuild-register": "^3.4.2",
+    "express": "^4.18.2",
+    "express-validator": "^6.15.0",
+    "nodemon": "^2.0.21",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.2"
+  }
+}
