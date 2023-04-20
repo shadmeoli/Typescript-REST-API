@@ -11,7 +11,7 @@ eslint --fix
 echo -e "${G} Github staging complete +++++++++ ${G}" 
 
 # ? asking fot automatic push to github after linting
-read -p "Would you like to also push the code to github?(Y/n)" yesno
+read -p "Would you like to also push the code to github?(Y/n) " yesno
 case $yesno in
     [Yy]* ) 
         git init
