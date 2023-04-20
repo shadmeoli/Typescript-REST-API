@@ -11,10 +11,15 @@ datasource db {
 
 // user schema
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  phone Int?
+  id        Int    @id @default(autoincrement())
+  email     String @unique
+  phone     Int?
   firstname String
-  lastName String
-  social Json?
+  lastName  String
+  social    Json?
+}
+
+// course schema
+model Course {
+id Int @id @default(autoincrement())
 }
