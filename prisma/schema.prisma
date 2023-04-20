@@ -8,3 +8,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// user schema
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  phone Int?
+  firstname String
+  lastName String
+  social Json?
+}
