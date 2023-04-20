@@ -11,12 +11,13 @@ datasource db {
 
 // user schema
 model User {
-  id        Int    @id @default(autoincrement())
-  email     String @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
   phone     Int?
   firstname String
   lastName  String
   social    Json?
+  courses   Course[] // many to many erationship to the Course relation
 }
 
 // course schema
@@ -24,6 +25,24 @@ model Course {
   id            Int    @id @default(autoincrement())
   name          String
   courseDetails String
+  members       User[]
+}
+
+model courseEnrollment {
+  createdAt DateTime @default(now())
+  role      UserRole
+
+  userId   Int // relations
+  courseId Int
+  user     User   @relation(fields: [userId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id])
+
+  @@id([uerId, courseId, role])
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
 }
 
 // test
