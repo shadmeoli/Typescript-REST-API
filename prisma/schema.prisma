@@ -21,5 +21,21 @@ model User {
 
 // course schema
 model Course {
-  id Int @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
+  name          String
+  courseDetails String
+}
+
+// test
+model Test {
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt
+  name      String
+  date      DateTime
+}
+
+model TestResult {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  result    Int // as percentage
 }
