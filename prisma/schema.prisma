@@ -12,13 +12,15 @@ datasource db {
 
 // user schema
 model User {
-  id        Int                @id @default(autoincrement())
-  email     String             @unique
-  phone     Int?
-  firstname String
-  lastName  String
-  social    Json
-  courses   courseEnrollment[]
+  id          Int                @id @default(autoincrement())
+  email       String             @unique
+  phone       Int?
+  firstname   String
+  lastName    String
+  social      Json
+  courses     courseEnrollment[]
+  testResults TestResult[]       @relation(name: "results")
+  testResult  TestResult[]       @relation(name: "graded")
 }
 
 // course schema
@@ -65,4 +67,12 @@ model TestResult {
   result    Int // as percentage
   testId    Int
   test      Test     @relation(fields: [testId], references: [id])
+
+  studentId Int
+  student   User @relation(name: "results", fields: [studentId], references: [id])
+
+  gradedId Int
+  gradedBy User @relation(name: "graded", fields: [gradedId], references: [id])
+  // User     User? @relation(fields: [userId], references: [id])
+  // userId   Int?
 }
