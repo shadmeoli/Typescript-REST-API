@@ -1,5 +1,5 @@
 // ? user signup feature
-export interface SignupFeatures {
+export type SignupFeatures = {
     first_name: string,
     last_name: string,
     email: string,
@@ -10,13 +10,13 @@ export interface SignupFeatures {
 
 
 // ? login interface
-export interface LoginFeature {
+export type LoginFeature = {
     username: string,
     password: string
 }
 
 // ? account status
-export interface verificationFeature {
+export type verificationFeature =  {
     // * alternatively you can use a JWT
     // ? assuming it's an alphanumric ID or a BSON object
     user_id: string,

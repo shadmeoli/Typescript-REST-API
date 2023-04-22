@@ -73,6 +73,5 @@ model TestResult {
 
   gradedId Int
   gradedBy User @relation(name: "graded", fields: [gradedId], references: [id])
-  // User     User? @relation(fields: [userId], references: [id])
-  // userId   Int?
+
 }
