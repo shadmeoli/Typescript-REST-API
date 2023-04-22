@@ -1,9 +1,10 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// client session generator
 generator client {
   provider = "prisma-client-js"
 }
 
+// database connection witht he connection string from the .env file
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -11,33 +12,22 @@ datasource db {
 
 // user schema
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int                @id @default(autoincrement())
+  email     String             @unique
   phone     Int?
   firstname String
   lastName  String
-  social    Json?
-  courses   Course[] // many to many erationship to the Course relation
+  social    Json
+  courses   courseEnrollment[]
 }
 
 // course schema
 model Course {
-  id            Int    @id @default(autoincrement())
+  id            Int                @id @default(autoincrement())
   name          String
   courseDetails String
-  members       User[]
-}
-
-model courseEnrollment {
-  createdAt DateTime @default(now())
-  role      UserRole
-
-  userId   Int // relations
-  courseId Int
-  user     User   @relation(fields: [userId], references: [id])
-  course   Course @relation(fields: [courseId], references: [id])
-
-  @@id([uerId, courseId, role])
+  members       courseEnrollment[]
+  tests         Test[]
 }
 
 enum UserRole {
@@ -45,16 +35,34 @@ enum UserRole {
   TEACHER
 }
 
-// test
+model courseEnrollment {
+  createdAt DateTime @default(now())
+  role      UserRole
+
+  userId   Int
+  user     User   @relation(fields: [userId], references: [id]) // this will create a relation with some references for the user modek
+  courseId Int
+  course   Course @relation(fields: [courseId], references: [id])
+
+  // assuring the combinations are unique for the used relations 
+  @@id([userId, courseId, role]) // compund primary key
+}
+
+// test | exams
 model Test {
-  id        Int      @id @default(autoincrement())
-  updatedAt DateTime @updatedAt
-  name      String
-  date      DateTime
+  id         Int          @id @default(autoincrement())
+  updatedAt  DateTime     @updatedAt
+  name       String
+  date       DateTime
+  courseID   Int
+  course     Course       @relation(fields: [courseID], references: [id])
+  testResult TestResult[]
 }
 
 model TestResult {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   result    Int // as percentage
+  testId    Int
+  test      Test     @relation(fields: [testId], references: [id])
 }
